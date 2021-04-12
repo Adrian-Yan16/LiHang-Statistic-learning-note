@@ -26,7 +26,7 @@ class Perceptron:
         self.b = 0
         self.l_rate = l_rate
 
-    def false2hyperplane_loss(self,x,y):
+    def judge(self,x,y):
         l = y * (np.dot(self.w,x) + self.b)
         return l
 
@@ -38,10 +38,11 @@ class Perceptron:
             for d in range(len(X_train)):
                 X = X_train[d]
                 y = Y_train[d]
-                if self.false2hyperplane_loss(X,y) <= 0:
+                if self.judge(X,y) <= 0:
                     self.w = self.w + self.l_rate * np.dot(y,X)
                     self.b = self.b + self.l_rate * y
                     false_count += 1
+            # 记录误分类点个数
             max_f = max(max_f,false_count)
             if false_count == 0:
                 false = False
@@ -49,6 +50,7 @@ class Perceptron:
         print("Perceptron Model")
 
     def predict(self,x):
+        # 预测
         y = np.dot(self.w,x) + self.b
         return 1 if y >= 0 else -1
 

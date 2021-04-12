@@ -27,7 +27,9 @@ class Perceptron:
         self.Y_train = Y_train
         self.N = len(self.X_train)
         self.a = np.zeros(self.N)
-        self.b = 0
+        # 原代码这里需要更新 b
+        # 事实上 b 可以用 a 和 y 的点积求出，无需更新
+        # self.b = 0
         self.l_rate = l_rate
         self.cal_gram()
 
@@ -39,8 +41,10 @@ class Perceptron:
                 self.gram[i][j] = np.dot(self.X_train[i],self.X_train[j])
 
     def judge(self,i):
-        res = np.dot(self.a * y,self.gram[:,i])
-        res = (res + self.b)*y[i]
+        # 计算 y(wx + b)
+        res = np.dot(self.a * self.Y_train,self.gram[:,i])
+        # b = np.dot(self.a,self.Y_train)
+        res = (res + np.dot(self.a,self.Y_train)) * self.Y_train[i]
         return res
 
     def fit(self):
@@ -56,12 +60,15 @@ class Perceptron:
         print('Perceptron Model fit complete')
 
     def update(self,i):
+        # 更新参数
         self.a[i] = self.a[i] + self.l_rate
-        self.b = self.b + self.l_rate * self.Y_train[i]
+        # self.b = self.b + self.l_rate * self.Y_train[i]
 
-    def cal_w(self):
+    def cal_w_b(self):
+        # 为了画图
         w = np.dot(self.a * self.Y_train, self.X_train)
-        return w
+        b = np.dot(percep.a,percep.Y_train)
+        return w,b
 
 
 
@@ -69,8 +76,8 @@ percep = Perceptron(x,y)
 percep.fit()
 
 x = np.linspace(4,7,10)
-w = percep.cal_w()
-y_ = -(w[0] * x + percep.b)/w[1]
+w,b = percep.cal_w_b()
+y_ = -(w[0] * x + b)/w[1]
 plt.plot(x,y_)
 plt.scatter(df[:50]['sepal length'], df[:50]['sepal width'], label='0')
 plt.scatter(df[50:100]['sepal length'], df[50:100]['sepal width'], label='1')
