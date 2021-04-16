@@ -53,8 +53,12 @@ class KdTree:
         # 数据维度
         k = len(point)
         def search(kd_node,target):
+            if not kd_node.left and not kd_node.right:
+                parent_node = kd_node.dom_elt   
+                dis = math.sqrt(sum([(p1 - p2) ** 2 for p1,p2 in zip(parent_node,target)]))
+                return self.result(parent_node,dis)
             if not kd_node:
-                return self.result([0] * k,float('inf'))
+                return self.result([None] * k,float('inf'))
 
             # 获取在当前的分割轴上的点和分割的维度
             split = kd_node.split
