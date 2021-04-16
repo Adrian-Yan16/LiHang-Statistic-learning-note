@@ -110,7 +110,7 @@ if __name__ == '__main__':
     kd = KdTree(data)
     # preorder(kd.root)
 
-    ret = find_nearest(kd,[3,4.5])
+    ret = kd.find_nearest([3,4.5])
     print(ret)
 
     # N = 400000
