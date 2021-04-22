@@ -87,14 +87,14 @@ class ID3:
         # 2，若 A 为空，则 T 为单结点树，将 D 中实例数最大的类 Ck 作为该结点的类标记
         if features.size == 0:
             return Node(root=True,label=
-                        value_count.sort_values(ascending=False).index[0])
+                        value_count.sort_values.index[0])
         # 3，计算信息增益，得到最优特征 Ag
         Ag,info_gain = self.best_feature(features,y_train)
         max_feature = features.iloc[:,Ag]
         # 4，Ag 的信息增益小于 epsilon，则将 T 置为单结点树，并将D中是实例数最大的类Ck作为该节点的类标记，返回T
         if info_gain < self.epsilon:
             return Node(root=True,label=
-                        value_count.sort_values(ascending=False).index[0])
+                        value_count.sort_values.index[0])
         # 5，构建 Ag 子集
         node_tree = Node(root=False,feature=Ag)
         feature_list = set(max_feature)
