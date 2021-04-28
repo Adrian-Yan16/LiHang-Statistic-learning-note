@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_iris
-from sklearn.model_selection  import train_test_split
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+from sklearn.ensemble import AdaBoostClassifier
 
 
 class BasicModel:
@@ -47,7 +48,6 @@ class Adaboost:
         self.batch = batch
         self.alphas = []
         self.best_models = []
-
 
     def fit(self,X,Y):
         N = len(X)
@@ -115,6 +115,10 @@ if __name__ == '__main__':
     plt.legend()
 
     adaboost = Adaboost(10)
+    adaboost.fit(X,y)
+
+    # sklearn
+    ada = AdaBoostClassifier()
     adaboost.fit(X,y)
 
 
