@@ -88,7 +88,7 @@ class Adaboost:
         pred[pred < 0] = -1
         return pred
 
-
+    
 if __name__ == '__main__':
     # X = np.arange(10)
     # Y = np.array([1, 1, 1, -1, -1, -1, 1, 1, 1, -1])
