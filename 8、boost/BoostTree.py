@@ -12,7 +12,7 @@ class RegressionBoostTree:
         length = len(X)
         # 8.3.1 初始化 f0(x) = 0
         self.Tx = np.zeros_like(Y)
-        min_ms = float('INF')
+        min_se = float('INF')
         self.best_split_point = [0] * (self.M + 1)
         c1 = 0
         c2 = 0
@@ -33,13 +33,13 @@ class RegressionBoostTree:
                 # 平方损失误差
                 ms = np.sum(np.power(y1 - tmp_c1,2)) + \
                      np.sum(np.power(y2 - tmp_c2,2))
-                if ms < min_ms:
-                    min_ms = ms
+                if ms < min_se:
+                    min_se = ms
                     self.best_split_point[m] = split_point
                     c1 = tmp_c1
                     c2 = tmp_c2
-            print('平方损失误差:',round(min_ms,2))
-            min_ms = float('INF')
+            print('平方损失误差:', round(min_se, 2))
+            min_se = float('INF')
             print('最优分割点及c1,c2:',self.best_split_point[m],c1,c2)
 
     def predict(self,x):

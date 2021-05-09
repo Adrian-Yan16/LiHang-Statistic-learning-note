@@ -53,7 +53,6 @@ $$
 \gamma = \frac{\hat\gamma}{||w||}
 $$
 
-
 ||w|| = 1 时，两者相等，如果超平面参数成比例的增长（超平面不变），函数间隔也成比例的改变，几何间隔不变
 
 ## 间隔最大化
@@ -148,13 +147,13 @@ $$
    $$
    max_\alpha-\frac12\sum_i\sum_j\alpha_i\alpha_jy_iy_j(x_i\cdot x_j) + \sum_i\alpha_i\tag{7.21}\\
    s.t.\quad\sum_i\alpha_iy_i = 0\\
-   \alpha_i = 0
+   \alpha_i \geq 0
    $$
    将 7.21 转化为求极小，就成了下面与之等价的对偶最优化问题：
    $$
-   max_\alpha\frac12\sum_i\sum_j\alpha_i\alpha_jy_iy_j(x_i\cdot x_j) - \sum_i\alpha_i\tag{7.22}\\
+   min_\alpha\frac12\sum_i\sum_j\alpha_i\alpha_jy_iy_j(x_i\cdot x_j) - \sum_i\alpha_i\tag{7.22}\\
    s.t.\quad\sum_i\alpha_iy_i = 0\\
-   \alpha_i = 0
+   \alpha_i \geq 0
    $$
 
 **定理 7.2** 设 $\alpha^* = (\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T$ 是对偶问题的最优解，则存在下标 j，使得 $\alpha_j^*>0$，并可按下式求得原始最优化问题的解 $w^*,b^*$
@@ -510,7 +509,7 @@ E_i = g(x_i)-y_i =(\sum_j\alpha_jy_jK(x_j,x_i)+b) - y_i,i=1,2\tag{7.105}
 $$
 当 i=1,2 时，$E_i$ 为函数 g(x) 对 $x_i$ 的预测值与真实输出 $y_i$ 之差
 
-**定理** 最优化问题 7.101 沿着约束方向未经剪辑的解是
+**定理** 最优化问题 7.101 沿着约束方向未经剪辑的解是                                                  
 $$
 \alpha_2^{n,u}=\alpha_2^o + \frac{y_2(E_1 - E_2)}{\eta}\tag{7.106}\\
 \eta = K_{11} + K_{22} - 2K_{12} = (\Phi(x_1) - \Phi(x_2))^2
