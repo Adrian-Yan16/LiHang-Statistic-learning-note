@@ -128,7 +128,7 @@ G_j = \sum_{i\in R_j}g_i\quad H_j = \sum_{i\in R_j}h_i
 $$
 代入目标函数得
 $$
-Obj^t = \sum_j[G_jw_j + \frac12(H_j + \lambda)w_j^2]+\lambda T
+Obj^t = \sum_j[G_jw_j + \frac12(H_j + \lambda)w_j^2]+\gamma T
 $$
 对 $w_j$ 求导等于 0，得
 $$
